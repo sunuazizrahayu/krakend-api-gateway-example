@@ -1,0 +1,42 @@
+{
+	"version": 2,
+	"endpoints": [
+		{
+			"endpoint": "/",
+			"backend": [
+				{
+					"host": ["http://app-php"],
+					"url_pattern": "/index.php"
+				}
+			]
+		},
+		{
+			"endpoint": "/login",
+			"method": "POST",
+			"querystring_params": ["token"],
+			"backend": [
+				{
+					"host": ["http://app-php"],
+					"url_pattern": "/login.php"
+				}
+			]
+		},
+		{
+			"endpoint": "/me",
+			"output_encoding": "no-op",
+			"headers_to_pass": ["*"],
+			"backend": [
+				{
+					"host": ["http://app-php"],
+					"url_pattern": "/github.php",
+					"encoding": "no-op",
+					"extra_config": {
+						"github_com/zean00/jwtextract": {
+							"extract_all" : true
+						}
+					}
+				}
+			]
+		}
+	]
+}
