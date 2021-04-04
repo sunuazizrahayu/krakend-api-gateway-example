@@ -1,28 +1,21 @@
 <?php
-include 'php-jwt/src/JWT.php';
+include 'php-jwt/JWT.php';
 
 use \Firebase\JWT\JWT;
 
 
+$hd = getallheaders()['Authorization'];
+$arr = explode(' ', $hd);
+$jwt = $arr[count($arr)-1];
 
 $key = "secret";
-$payload = array(
-    "iss" => "http://example.org",
-    "aud" => "http://example.com",
-    "iat" => 1356999524,
-    "nbf" => 1357000000
-);
+try {
+	$decoded = JWT::decode($jwt, $key, array('HS256'));
+} catch (Exception $e) {
+	http_response_code(401);
+	echo "error: ".$e;
+}
 
-/**
- * IMPORTANT:
- * You must specify supported algorithms for your application. See
- * https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40
- * for a list of spec-compliant algorithms.
- */
-echo $jwt = JWT::encode($payload, $key);
-$decoded = JWT::decode($jwt, $key, array('HS256'));
 
+echo "<pre>";
 print_r($decoded);
-
-
-echo "haha";

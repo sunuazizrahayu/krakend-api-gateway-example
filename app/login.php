@@ -25,9 +25,14 @@ if ($username==$key && $password==$key) {
 		// "iat" => 1356999524,
 		// "nbf" => 1357000000,
 		"data" => $data,
-		"exp" => time()+ 600,
+		"exp" => time()+ 3000,
 	);
-	$jwt = JWT::encode($payload, $key);
+
+	//bug if kid none
+	// $jwt = JWT::encode($payload, $key, "HS256");
+	
+	//done
+	$jwt = JWT::encode($payload, $key, "HS256", "sim2");
 
 	echo json_encode([
 		"token" => [

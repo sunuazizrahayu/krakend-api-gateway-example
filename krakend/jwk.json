@@ -1,0 +1,16 @@
+{
+	"keys": [
+		{
+			"kty": "oct",
+			"alg": "A128KW",
+			"k": "GawgguFyGrWKav7AX4VKUg",
+			"kid": "sim1"
+		},
+		{
+			"alg": "HS256",
+			"k": "c2VjcmV0",
+			"kid": "sim2",
+			"kty": "oct"
+		}
+	]
+}

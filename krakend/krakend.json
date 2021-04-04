@@ -22,21 +22,34 @@
 			]
 		},
 		{
-			"endpoint": "/me",
+			"endpoint": "/jwt",
+			"headers_to_pass": ["Authorization"],
 			"output_encoding": "no-op",
-			"headers_to_pass": ["*"],
 			"backend": [
 				{
 					"host": ["http://app-php"],
-					"url_pattern": "/github.php",
-					"encoding": "no-op",
-					"extra_config": {
-						"github_com/zean00/jwtextract": {
-							"extract_all" : true
-						}
-					}
+					"url_pattern": "/jwt.php",
+					"encoding": "no-op"
 				}
 			]
+		},
+		{
+			"endpoint": "/me",
+			"output_encoding": "no-op",
+			"backend": [
+				{
+					"host": ["http://app-php"],
+					"url_pattern": "/me.php",
+					"encoding": "no-op"
+				}
+			],
+			"extra_config": {
+				"github.com/devopsfaith/krakend-jose/validator": {
+					"alg": "HS256",
+					"jwk_local_path": "./jwk.json",
+					"disable_jwk_security": true
+				}
+			}
 		}
 	]
 }
