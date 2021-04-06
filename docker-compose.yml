@@ -1,13 +1,21 @@
 version: '3'
 
 services:
-  app:
-    container_name: app-php
+  backend1:
+    container_name: backend1
     image: jamesbrink/php:7.2
     ports:
       - 8001:80
     volumes:
-      - ./app:/var/www/localhost/htdocs
+      - ./app/backend1:/var/www/localhost/htdocs
+
+  backend2:
+    container_name: backend2
+    image: jamesbrink/php:7.2
+    ports:
+      - 8002:80
+    volumes:
+      - ./app/backend2:/var/www/localhost/htdocs
 
   krakend:
     container_name: krakend
@@ -17,4 +25,5 @@ services:
     ports:
       - 8000:8080
     depends_on:
-      - app
+      - backend1
+      - backend2

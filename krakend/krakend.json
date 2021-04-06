@@ -5,7 +5,7 @@
 			"endpoint": "/",
 			"backend": [
 				{
-					"host": ["http://app-php"],
+					"host": ["http://backend2"],
 					"url_pattern": "/index.php"
 				}
 			]
@@ -13,10 +13,29 @@
 		{
 			"endpoint": "/login",
 			"method": "POST",
+			"backend": [
+				{
+					"host": ["http://backend1"],
+					"url_pattern": "/token_issuer.php"
+				}
+			],
+			"extra_config": {
+				"github.com/devopsfaith/krakend-jose/signer": {
+					"alg": "HS256",
+					"kid": "sim2",
+					"keys-to-sign": ["token","token2.access_token"],
+					"jwk_local_path": "./jwk.json",
+					"disable_jwk_security": true
+				}
+			}
+		},
+		{
+			"endpoint": "/login2",
+			"method": "POST",
 			"querystring_params": ["token"],
 			"backend": [
 				{
-					"host": ["http://app-php"],
+					"host": ["http://backend2"],
 					"url_pattern": "/login.php"
 				}
 			]
@@ -27,7 +46,7 @@
 			"output_encoding": "no-op",
 			"backend": [
 				{
-					"host": ["http://app-php"],
+					"host": ["http://backend2"],
 					"url_pattern": "/jwt.php",
 					"encoding": "no-op"
 				}
@@ -38,7 +57,7 @@
 			"output_encoding": "no-op",
 			"backend": [
 				{
-					"host": ["http://app-php"],
+					"host": ["http://backend2"],
 					"url_pattern": "/me.php",
 					"encoding": "no-op"
 				}
