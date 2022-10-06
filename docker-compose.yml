@@ -19,7 +19,7 @@ services:
 
   krakend:
     container_name: krakend
-    image: devopsfaith/krakend
+    image: devopsfaith/krakend:1.4.1-alpine
     volumes:
       - ./krakend:/etc/krakend
     ports:

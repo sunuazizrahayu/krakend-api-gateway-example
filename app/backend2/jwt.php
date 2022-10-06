@@ -13,7 +13,11 @@ try {
 	$decoded = JWT::decode($jwt, $key, array('HS256'));
 } catch (Exception $e) {
 	http_response_code(401);
-	echo "error: ".$e;
+	echo json_encode(['message'=>'Invalid token','errors'=>$e]);
+
+	echo PHP_EOL.PHP_EOL.PHP_EOL;
+	echo $e;
+	die;
 }
 
 

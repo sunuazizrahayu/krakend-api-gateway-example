@@ -5,13 +5,13 @@
 			"endpoint": "/",
 			"backend": [
 				{
-					"host": ["http://backend2"],
+					"host": ["http://backend1"],
 					"url_pattern": "/index.php"
 				}
 			]
 		},
 		{
-			"endpoint": "/login",
+			"endpoint": "/login-krakend",
 			"method": "POST",
 			"backend": [
 				{
@@ -30,7 +30,7 @@
 			}
 		},
 		{
-			"endpoint": "/login2",
+			"endpoint": "/login-service",
 			"method": "POST",
 			"querystring_params": ["token"],
 			"backend": [
@@ -53,12 +53,12 @@
 			]
 		},
 		{
-			"endpoint": "/me",
+			"endpoint": "/krakend-secured",
 			"output_encoding": "no-op",
 			"backend": [
 				{
-					"host": ["http://backend2"],
-					"url_pattern": "/me.php",
+					"host": ["http://backend1"],
+					"url_pattern": "/secured.php",
 					"encoding": "no-op"
 				}
 			],
